@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import flowerLogo from '../../assets/photos-flower.png'
+import { browser } from 'wxt/browser'
 
 type Petal = {
   id: string
@@ -28,10 +29,10 @@ function App() {
   // On load: detect if body has a color set by the extension
   useEffect(() => {
     const detectBackground = async () => {
-      const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+      const [tab] = await browser.tabs.query({ active: true, currentWindow: true })
       if (!tab?.id) return
 
-      const [injection] = await chrome.scripting.executeScript({
+      const [injection] = await browser.scripting.executeScript({
         target: { tabId: tab.id },
         func: () => {
           // We only care about the color set by our extension
@@ -53,10 +54,10 @@ function App() {
 const resetBackground = async () => {
   setSelectedColor(null)
 
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+  const [tab] = await browser.tabs.query({ active: true, currentWindow: true })
   if (!tab?.id) return
 
-  await chrome.scripting.executeScript({
+  await browser.scripting.executeScript({
     target: { tabId: tab.id },
     func: () => {
       const clearBg = (el: HTMLElement | null) => {
@@ -99,10 +100,10 @@ const resetBackground = async () => {
 const applyColor = async (color: string) => {
   setSelectedColor(color)
 
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true })
+  const [tab] = await browser.tabs.query({ active: true, currentWindow: true })
   if (!tab?.id) return
 
-  await chrome.scripting.executeScript({
+  await browser.scripting.executeScript({
     target: { tabId: tab.id },
     func: (c: string) => {
       const applyBg = (el: HTMLElement | null) => {
