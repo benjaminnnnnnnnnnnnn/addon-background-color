@@ -10,7 +10,7 @@ on:
 
 
 jobs:
-  generate_tag:
+  firefox:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -29,7 +29,7 @@ jobs:
         run: npm run build:firefox
 
       - name: create zip
-        run: zip -r app.zip ./dist/firefox/*
+        run: zip -r app.zip ./dist/firefox-mv2/*
 
       - name: Upload artifact
         uses: actions/upload-artifact@v4
