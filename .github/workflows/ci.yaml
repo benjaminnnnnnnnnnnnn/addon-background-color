@@ -32,4 +32,4 @@ jobs:
         run: zip -r app.zip ./dist/firefox/*
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
