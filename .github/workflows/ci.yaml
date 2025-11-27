@@ -22,7 +22,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      -
+      - name: lint
+        run: npm run lint:check
       
       - name: run applicatiob
         run: npm run dev:firefox
