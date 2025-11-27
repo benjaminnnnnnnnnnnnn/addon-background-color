@@ -28,6 +28,9 @@ jobs:
       - name: run
         run: npm run build:firefox
 
+      - name: see files
+        run: ls -R ./
+
       - name: create zip
         run: zip -r app.zip ./output/firefox-mv2/*
 
